@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "module": "ESNext",
+        "noLib": true,
+        "target": "ES3",
+        "ignoreDeprecations": "5.0",
+        "types": [
+            "types-for-adobe/AfterEffects/22.0"
+        ],
+        "paths": {
+            "@root/*": [
+                "./*"
+            ]
+        }
+    },
+    "include": [
+        "host/**/*.tsx",
+        "host/**/*.ts"
+    ]
+}

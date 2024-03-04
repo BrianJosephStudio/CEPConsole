@@ -1,0 +1,72 @@
+{
+    "compilerOptions": {
+      "target": "ES5",
+      "useDefineForClassFields": false,
+      "module": "ES2020",
+      "lib": [
+        "ES2020",
+        "DOM",
+        "DOM.Iterable"
+      ],
+      "skipLibCheck": true,
+      /* Bundler mode */
+      "moduleResolution": "Node10",
+      "esModuleInterop": true,
+      // "allowImportingTsExtensions": true,
+      "resolveJsonModule": false,
+      "isolatedModules": false,
+      "noEmit": false,
+      "jsx": "preserve",
+      /* Linting */
+      "strict": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "noFallthroughCasesInSwitch": true,
+      "paths": {
+        "@root/*": [
+          "./*"
+        ],
+        "@types/*": [
+          "./types/*"
+        ],
+        "@classes/*": [
+          "./src/app-logic/classes/*"
+        ],
+        "@utils/*": [
+          "./src/app-logic/utils/*"
+        ],
+        "@components/*": [
+          "./src/components/*"
+        ],
+        "@pages/*": [
+          "./src/pages/*"
+        ],
+        "@public/*": [
+          "./src/public/*"
+        ],
+        "@mocks/*": [
+          "./src/app-logic/utils/mocks/*"
+        ],
+      }
+    },
+    "include": [
+      "./*.ts",
+      "src/**/*.ts",
+      "src/**/*.d.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue",
+      "types/**/*.ts",
+      "types/**/*.d.ts",
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+    "references": [
+      {
+        "path": "./tsconfig.extendscript.json"
+      },
+      // {
+      //   "path": "./tsconfig.node.json"
+      // }
+    ]
+  }
