@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { VueLoaderPlugin } from 'vue-loader';
 import { fileURLToPath } from 'url';
 import path from "path"
 
@@ -9,13 +8,11 @@ const __dirname = path.dirname(__filename)
 
 const webpackConfig = {
     target: "web",
-    entry: './src/main.ts',
+    entry: './src/index.tsx',
     output: {
-        filename: 'bundle.js',
-        // chunkFilename: "sourcemap",
+        filename: 'CEPTerminal.js',
         path: path.resolve(__dirname, "client"),
     },
-    // devtool: "source-map",
     resolve: {
         alias: {
             '@root': __dirname,
@@ -27,32 +24,23 @@ const webpackConfig = {
             '@public': path.resolve(__dirname, 'src', 'public'),
             '@mocks': path.resolve(__dirname, 'src', 'app-logic', 'utils', 'mocks'),
         },
-        extensions: ['.js', '.ts', '.vue'],
+        extensions: ['.tsx', '.ts', '.js', 'jsx'],
     },
-    externals: {
-        'fs/promises': 'commonjs2 fs/promises',
-        'path': 'commonjs2 path',
-        'os': 'commonjs2 os',
-    },
+    // externals: {
+    //     'fs/promises': 'commonjs2 fs/promises',
+    //     'path': 'commonjs2 path',
+    //     'os': 'commonjs2 os',
+    // },
     module: {
         rules: [
             {
-                test: /\.vue$/,
-                use: 'vue-loader',
+                test: /\.[tj]sx?$/,
+                use: ['ts-loader'],
+                exclude: /node_modules/,
             },
             {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.ts$/,
-                use: {
-                    loader: 'ts-loader',
-                    options: {
-                        appendTsSuffixTo: [/\.vue$/], // This line specifies the appendTsSuffixTo option
-                    },
-                },
-                exclude: /node_modules/,
             },
         ],
     },
@@ -60,11 +48,6 @@ const webpackConfig = {
         new HtmlWebpackPlugin({
             template: './index.html',
         }),
-        new VueLoaderPlugin(),
-        new webpack.DefinePlugin({
-            '__VUE_OPTIONS_API__': true, // or false, depending on your usage
-            '__VUE_PROD_DEVTOOLS__': false,
-        })
     ],
     devServer: {
         port: 3001,
