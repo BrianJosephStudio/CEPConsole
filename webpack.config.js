@@ -1,4 +1,3 @@
-import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
 import path from "path"
@@ -7,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const webpackConfig = {
-    target: "web",
+    target: "electron-renderer",
     entry: './src/index.tsx',
     output: {
         filename: 'CEPTerminal.js',
@@ -35,7 +34,14 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.[tj]sx?$/,
-                use: ['ts-loader'],
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            configFile: 'tsconfig.json'
+                        }
+                    }
+                ],
                 exclude: /node_modules/,
             },
             {
