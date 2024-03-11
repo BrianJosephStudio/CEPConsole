@@ -1,6 +1,10 @@
-import { app, BrowserWindow } from 'electron';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { app, BrowserWindow, ipcMain } from 'electron'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+import os from 'os'
+import pty from 'node-pty'
+
+var shell = os.platform() === "win32" ? 'powershell.exe' : 'bash'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,6 +17,8 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
         },
     });
 
@@ -21,14 +27,28 @@ function createWindow() {
     mainWindow.on('closed', () => (mainWindow = null));
 }
 
-app.whenReady().then(() => {
-    createWindow()
+const ptyProcess = pty.spawn(shell, [], {
+    name: 'xterm-color',
+    cols: 80,
+    rows: 24,
+    ced: process.env.HOME,
+    end: process.env
+})
 
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
-        }
-    })
+ptyProcess.on("data", (data) => {
+    mainWindow.webContents.send("terminal.incData", data)
+})
+
+ipcMain.on("terminal.toTerm", (event, data) => {
+    ptyProcess.write(data)
+})
+
+app.on('ready', createWindow)
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+    }
 })
 
 app.on('window-all-closed', () => {
