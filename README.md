@@ -7,10 +7,10 @@ Currently, there is no way to execute Console methods suh as 'console.log' insid
 # HOW
 CEP Console offers a console interface that displays logs and errors for your project.
 
-## Scripts:
+### Scripts:
 Global 'cepConsole' object available that can be used in your scripts out of the box.
    
-## CEP Extensions:
+### CEP Extensions:
 For the Javascript runtime available to CEP Extensions, installing the CEPConsole npm package is necessary in order to be able to make use of cepConsole object over on the ExtenJavascript Runtime to the Extendscript runtime through CSInterface.
 
 # FOR WHO
