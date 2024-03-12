@@ -1,13 +1,17 @@
 # WHAT
-CEP Console is an Adobe CEP Extension that allows developers to execute console functions while developing their own scripts or Extensions.
+CEP Console is an Adobe CEP extension that helps developers to debug their code faster and more easily by allowing them to execute console methods in scripts and extension projects.
 
 # WHY
-Currently, there is no way to execute Console methods inside of Adobe apps to debug Scripts and Extensions. A common alternative is to use 'alert()', which is an extremely tedious and innefficient method to debug your code.
+Currently, there is no way to execute Console methods suh as 'console.log' inside of Adobe apps to debug Scripts and Extensions. A common alternative is to use 'alert()', which is a tedious and innefficient strategy.
 
 # HOW
-CEP Console offers a console interface that displays logs and errors in your Script file or Extension.
-## ExtendScript Runtime:
-  For JSX scripting files, CEP Console offers a global Console object that can be used from any script file. All variables are globally shared in this runtime so simply having the CEP Console open makes the integration work.
+CEP Console offers a console interface that displays logs and errors for your project.
+
+## Scripts:
+Global 'cepConsole' object available that can be used in your scripts out of the box.
    
-## Javascript Runtime:
-  For the Javascript runtime available to CEP Extensions, installing the CEP Console npm package is necessary in order to be able to make use of the global Console object over on the Extendscript runtime. The npm package offer a proxy Console object which redirects console calls from the javascript Runtime to the Extendscript runtime through CSInterface.
+## CEP Extensions:
+For the Javascript runtime available to CEP Extensions, installing the CEPConsole npm package is necessary in order to be able to make use of cepConsole object over on the ExtenJavascript Runtime to the Extendscript runtime through CSInterface.
+
+# FOR WHO
+Those who are developing Extendscript code and want a more native smoother experience debugging their Scripts and CEP Extensions
