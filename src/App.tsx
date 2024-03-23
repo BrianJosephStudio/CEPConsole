@@ -1,24 +1,17 @@
-import { ipcRenderer } from 'electron'
 import React, { useRef, useEffect } from 'react';
-import { Terminal } from 'xterm'
-
+import { TerminalBaseClient } from './app-logic/utils/clients/TerminalBaseClient';
 
 const App: React.FC = () => {
   const terminalRef = useRef(null)
 
   useEffect(() => {
-    const terminal = new Terminal()
-
-    terminal.open(terminalRef.current!)
-
-    terminal.write(`Welcome to the CEP Terminal`)
-
-    terminal.onData(e => ipcRenderer.send('terminal.toTerm',e))
-
-    ipcRenderer.on('terminal.incData', (event, data) =>  terminal.write(data))
+    if(!terminalRef.current){
+      return //TODO: Deal with this error
+    }
+    const terminal = new TerminalBaseClient(terminalRef.current)
 
     return () => {
-      terminal.dispose();
+      terminal.kill();
     };
   }, [])
 
