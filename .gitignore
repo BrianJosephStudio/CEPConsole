@@ -12,3 +12,4 @@ dist
 CEPTerminal.code-workspace
 host/index.js
 client
+.env
