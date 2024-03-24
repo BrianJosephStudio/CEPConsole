@@ -24,6 +24,7 @@
   "dependencies": {
     "@xterm/xterm": "^5.4.0",
     "csinterface-ts": "^1.0.3",
+    "dotenv": "^16.4.5",
     "electron-rebuild": "^3.2.9",
     "node-pty": "^1.0.0",
     "path": "^0.12.7",
